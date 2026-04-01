@@ -18,7 +18,7 @@
 ## Quickstart
 ```bash
 # 1. Clone
-git clone https://github.com/<seu-user>/task-orchestrator-api](https://github.com/JeanVitorDSL/task-orchestrator-api.git)
+git clone https://github.com/JeanVitorDSL/task-orchestrator-api.git
 cd task-orchestrator-api
 
 # 2. Configure o ambiente (opcional — defaults funcionam)
