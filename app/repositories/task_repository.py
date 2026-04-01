@@ -16,7 +16,7 @@ def find_all() -> list[Task]:
     return [_row_to_task(row) for row in rows]
 
 
-def find_by_id(task_id: int) -> Task | None:
+def find_by_id(task_id: int):
     with get_connection() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             cur.execute("SELECT * FROM tasks WHERE id = %s", (task_id,))
@@ -28,11 +28,7 @@ def save(task: Task) -> Task:
     with get_connection() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             cur.execute(
-                """
-                INSERT INTO tasks (title, priority, completed)
-                VALUES (%s, %s, %s)
-                RETURNING *
-                """,
+                "INSERT INTO tasks (title, priority, completed) VALUES (%s, %s, %s) RETURNING *",
                 (task.title, task.priority.value, task.completed),
             )
             row = cur.fetchone()
@@ -40,7 +36,7 @@ def save(task: Task) -> Task:
     return _row_to_task(row)
 
 
-def update_completion(task_id: int, completed: bool) -> Task | None:
+def update_completion(task_id: int, completed: bool):
     with get_connection() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             cur.execute(

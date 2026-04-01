@@ -21,7 +21,7 @@ services:
   api:
     build:
       context: .
-      target: runtime               # Usa só o stage de produção
+       #target: runtime               # Usa só o stage de produção
     container_name: tasks_api
     restart: unless-stopped
     ports:

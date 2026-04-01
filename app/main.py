@@ -17,10 +17,3 @@ if __name__ == "__main__":
     from app.config import Config
     app = create_app()
     app.run(host="0.0.0.0", port=Config.PORT)
-```
-
-**`requirements.txt`:**
-```
-Flask==3.1.0
-psycopg2-binary==2.9.9
-gunicorn==23.0.0    

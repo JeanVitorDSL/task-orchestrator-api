@@ -16,7 +16,6 @@ def create_task():
     body = request.get_json(silent=True) or {}
     title = body.get("title", "")
     priority = body.get("priority", "medium")
-
     try:
         task = task_service.create_task(title, priority)
         return jsonify(task.to_dict()), 201
