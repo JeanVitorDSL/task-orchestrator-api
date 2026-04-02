@@ -15,14 +15,14 @@ def list_all_tasks() -> list[Task]:
 
 
 def create_task(title: str, priority_value: str) -> Task:
-    if not title or not title.strip():
-        raise ValueError("Task title cannot be empty")
     try:
-        priority = Priority(priority_value.lower())
-    except ValueError:
-        valid = [p.value for p in Priority]
-        raise InvalidPriorityError(f"Priority must be one of: {valid}")
-    task = Task(title=title.strip(), priority=priority)
+        priority = Priority.from_value(priority_value)
+    except ValueError as e:
+        raise InvalidPriorityError(str(e)) from None
+    try:
+        task = Task(title=title, priority=priority)
+    except (ValueError, TypeError) as e:
+        raise ValueError(str(e)) from None
     return task_repository.save(task)
 
 
